@@ -12,6 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # R for Analysis
 
+Test tes test
+
 *** 
 
 # R Learning Outcomes
