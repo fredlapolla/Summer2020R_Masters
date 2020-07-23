@@ -1,0 +1,41 @@
+---
+title: "Masters Group Work July 23 2020"
+author: "Fred LaPolla"
+date: "7/23/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Group Work
+
+Try to make a histogram of MERCURYU and LDL Estimate. Are these  normally distributed or skewed, and if so, which way?
+
+```{r}
+
+```
+
+## Group Work
+
+Make a qq plot of LDL. Also make one for MercuryU. Would you expect either of these to be normal or skewed? How can you tell?
+
+```{r}
+
+```
+
+
+
+
+***
+
+## Group Work
+
+If we wanted to make a scatter plot of lead by cotinine, how would we do it? Based on what you now know about assessing skew, what test might we run for this?
+
+```{r}
+
+```
+
+
