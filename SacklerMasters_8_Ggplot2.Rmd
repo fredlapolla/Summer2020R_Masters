@@ -1,12 +1,12 @@
 ---
 title: "Masters 8 - Data Visualization for Presentation"
 author: "Fred LaPolla"
-date: "7/27/2020"
+date: "7/30/2020"
 output: slidy_presentation
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ***
@@ -17,6 +17,7 @@ knitr::opts_chunk$set(echo = FALSE)
 library(RCurl)
 url <- getURL("https://raw.githubusercontent.com/fredwillie/RScience2020/master/NYC_HANES_DIAB.csv")
 nyc <- read.csv(text = url)
+nyc$DX_DBTS <- factor(nyc$DX_DBTS, levels = 1:3, labels = c("Diabetes w/ DX", "Diabetes no DX", "No Diabetes"))
 ```
 
 ***
@@ -138,7 +139,7 @@ So now if we want to make charts like those above we can:
 Histograms
 
 ```{r, echo = TRUE}
-ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = ..count..)) +geom_bar()
+ggplot(nyc, aes(x = CHOLESTEROLTOTAL)) +geom_histogram()
 ```
 
 ***
@@ -146,14 +147,14 @@ ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = ..count..)) +geom_bar()
 ## Histogram Bins
 
 
-We can also set the binwidth
+We can also set the width
 
 ```{r, echo = TRUE}
-ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = ..count..)) +geom_bar(binwidth = 20)
+ggplot(nyc, aes(x = CHOLESTEROLTOTAL, )) +geom_histogram(binwidth=5)
 ```
 
 ```{r}
-ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = ..count..)) +geom_bar(binwidth = 20)
+ggplot(nyc, aes(x = CHOLESTEROLTOTAL,)) +geom_histogram(binwidth=20)
 
 
 ```
@@ -169,7 +170,7 @@ ggplot(nyc, aes(x = as.factor(GENDER), y =CHOLESTEROLTOTAL ))+geom_boxplot()
 
 ## Group work
 
-Make a histogram of lead levels, experiment with updating the binwidth. Make a boxplot of diabetes diagnosis vs glucos level.
+Make a histogram of lead levels, experiment with updating the bin width. Make a boxplot of diabetes diagnosis vs glucose level.
 
 ```{r}
 
@@ -179,6 +180,8 @@ Make a histogram of lead levels, experiment with updating the binwidth. Make a b
 ***
 
 ## Error Bars
+
+We can use a layer called stat_summary to add visualizations that are not derived from raw counts, like mean values or confidence intervals:
 
 ```{r}
 ggplot(nyc, aes(x = GENDER, y = CHOLESTEROLTOTAL)) + stat_summary(fun = mean, geom="bar",fill = "white", color = "black") + stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = .5) 
@@ -223,7 +226,7 @@ ggplot(nyc, aes(x = SPAGE, y = CHOLESTEROLTOTAL, col = as.factor(GENDER)))+geom_
 A quirk of ggplot is that colors of points are encoded col, but if you want bars to be filled, you must use fill:
 
 ```{r, echo = TRUE}
-ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = ..count.., fill = GENDER)) +geom_bar(binwidth = 10)
+ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = ..count.., fill = GENDER)) +geom_bar(width = 10)
 
 ```
 
@@ -245,9 +248,9 @@ display.brewer.all(colorblindFriendly = TRUE)
 
 Then:
 
-{r, echo = TRUE}
+```{r, echo = TRUE}
 ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = SPAGE, col = DX_DBTS))+geom_point() + scale_color_brewer(breaks = 3,palette = "Dark2")
-
+```
 
 ***
 
@@ -272,14 +275,14 @@ We may also want to change up the scales. The plot we just made aonly had tick m
 
 ```{r, echo = TRUE}
 
-ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = SPAGE, col = DX_DBTS))+geom_point()  + scale_x_continuous(breaks = seq(0, 400, 25))
+ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = SPAGE, col =DX_DBTS))+geom_point()+ scale_color_brewer(breaks = 3,palette = "Dark2")  + scale_x_continuous(breaks = seq(0, 400, 25))
 ```
 
 
 We could do the same for the y scale:
 
 ```{r, echo = TRUE}
-ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = SPAGE, col = DX_DBTS))+geom_point()  + scale_x_continuous(breaks = seq(0, 400, 25))+scale_y_continuous(breaks = seq(0, 100, 5))
+ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = SPAGE, col = DX_DBTS))+geom_point() +scale_color_brewer(breaks = 3,palette = "Dark2") + scale_x_continuous(breaks = seq(0, 400, 25))+scale_y_continuous(breaks = seq(0, 100, 5))
 ```
 
 ***
@@ -293,7 +296,7 @@ ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = SPAGE, col = DX_DBTS))+geom_point()  +
 We can also relabel the labels to make it more presentable for a paper, poster or talk. Perhaps you are noticing a trend that at first seems strange in ggplot but makes life easier: we keep making changes by adding arguments on to the end. This means once you get your baseline plot drawn you can then experiment on customizing for publication. 
 
 ```{r, echo = TRUE}
-ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = SPAGE, col = DX_DBTS))+geom_point()  + scale_x_continuous(breaks = seq(0, 400, 25))+scale_y_continuous(breaks = seq(0, 100, 5)) + xlab("Total Cholesterol Level mg/dL") + ylab("Age in years")
+ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = SPAGE, col = DX_DBTS))+geom_point() +scale_color_brewer(breaks = 3,palette = "Dark2") + scale_x_continuous(breaks = seq(0, 400, 25))+scale_y_continuous(breaks = seq(0, 100, 5)) + xlab("Total Cholesterol Level mg/dL") + ylab("Age in years")
 
 ```
 
@@ -310,7 +313,7 @@ We can also customize the overall "look" of the chart with a theme. As you start
 
 
 ```{r, echo = TRUE}
-ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = SPAGE, col = DX_DBTS))+geom_point()  + scale_x_continuous(breaks = seq(0, 400, 25))+scale_y_continuous(breaks = seq(0, 100, 5)) + xlab("Total Cholesterol Level mg/dL") + ylab("Age in years") + theme_minimal() + theme(legend.title = element_blank()) 
+ggplot(nyc, aes(x = CHOLESTEROLTOTAL, y = SPAGE, col = DX_DBTS))+geom_point()+scale_color_brewer(breaks = 3,palette = "Dark2")  + scale_x_continuous(breaks = seq(0, 400, 25))+scale_y_continuous(breaks = seq(0, 100, 5)) + xlab("Total Cholesterol Level mg/dL") + ylab("Age in years") + theme_minimal() + theme(legend.title = element_blank()) 
 
 ```
 

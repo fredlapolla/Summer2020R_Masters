@@ -1,0 +1,68 @@
+---
+title: "GroupWork727_Masters"
+author: "Fred LaPolla"
+date: "7/27/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(RCurl)
+url <- getURL("https://raw.githubusercontent.com/fredwillie/RScience2020/master/NYC_HANES_DIAB.csv")
+nyc <- read.csv(text = url)
+nyc$DX_DBTS <- factor(nyc$DX_DBTS, levels = 1:3, labels = c("Diabetes w/ DX", "Diabetes no DX", "No Diabetes"))
+```
+
+
+## Group Work
+
+Try out using GGplot to make a scatter plot of A1C vs Glucose. Remember there will be two parts: where you assign the aes and then where you add a geom
+
+```{r}
+
+```
+
+## Group work
+
+Try making the same A1C vs Glucose scatter plot but add in a line estimating linear correlation:
+
+```{r}
+
+```
+
+## Group work
+
+Make a histogram of lead levels, experiment with updating the binwidth. Make a boxplot of diabetes diagnosis vs glucos level.
+
+```{r}
+
+```
+
+
+## Group Work
+
+Try making a bar chart with error bars for mean Glucose by diabetes diagnosis
+
+```{r}
+
+```
+
+## Group Work
+
+Explore the palettes on R color brewer. Try changing the color scale on a scatter plot of glucose vs. A1C
+
+```{r}
+
+```
+
+
+## Group work
+
+Try adjusting the X and Y scales to be in increments of 50 for glucose, 2 for A1C in your scatter plot of A1C vs Glucose. Change the theme (background), update the X and Y labels to say "A1C level" and "Glucose level".
+
+```{r}
+
+```
