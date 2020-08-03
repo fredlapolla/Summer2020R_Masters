@@ -1,0 +1,47 @@
+---
+title: "August 3 Group Work"
+author: "Fred LaPolla"
+date: "7/30/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### On your own
+
+Make a contingency table of HSQ1 vs a dichotomized Has or does not have diabetes. Run a chi square test and look up the Cranmer's V (square-root of X square divided by n * df). We can then look up online a table to see if this is a small, moderate or large effect. 
+
+```{r}
+
+```
+
+## On Your Own
+
+Try comparing mean LDL by if a person has diabetes or not. To do this you will need to:
+
+1) Collapse Diabetes into two groups
+2) Check that LDL Estimate appears normally distributed
+3) Run a T Test. 
+
+
+```{r}
+
+```
+
+## On Your Own
+
+Try comparing the means of A1C in diabetics to non-diabetics. What command will you use, and which arguments will it take?
+
+```{r}
+
+```
+
+## On Your Own
+
+Run a correlation of lead to to total mercury. Which test will you choose and why? What results do you get?
+
+```{r}
+
+```
