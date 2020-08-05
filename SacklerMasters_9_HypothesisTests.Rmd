@@ -290,3 +290,33 @@ summary(CholDiabAnova)
 anova(CholDiabAnova)
 
 ```
+
+We often may want to adjust the p value if we have multiple p values. We can use p.adjust and set the method, for example "bonferroni" and "fdr"
+
+```{r}
+p.adjust(.418, method="bonferroni", 3)
+p.adjust(.418, method = "fdr", 3)
+```
+
+***
+
+
+
+## Power Assessment
+
+Assessing power will help readers of your research to know the likelihood of type II error (saying there is not a difference when in fact one exists). Underpowered studies are a major problem in pre-clinical research that limit the replicability of findings. It is best to be transparent about providing a power calculation so that readers will know if results need to be confirmed with larger studies. 
+
+Check out the information provided by Stat Methods on using the pwr package for power tests for different common hypothesis tests: https://www.statmethods.net/stats/power.html
+
+
+```{r}
+library(pwr)       
+pwr.t.test(n=450  , d =0.1194496 , sig.level =0.05, type = "two.sample", alternative=("two.sided"))
+        
+pwr.t.test( d = 0.1194496 , sig.level = 0.05, power = 0.8, type = "two.sample", alternative=("two.sided"))
+```
+
+
+
+
+
