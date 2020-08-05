@@ -207,9 +207,11 @@ Try comparing mean LDL by if a person has diabetes or not. To do this you will n
 
 ***
 
-## Non-Parametric Tests for Comparing Means
+## Non-Parametric Tests for Comparing Medians
 
 ### Mann-Whitney (unpaired) and Wilcoxon (paired)
+
+If we have a small sample under 30 (which in this case we have a large sample) and non-normally distributed data we may need to choose a non-parametric test. 
 
 **Confusing note:** Both of these are called wilcox.test() in R, and we then set an argument to be paired = TRUE or FALSE. 
 

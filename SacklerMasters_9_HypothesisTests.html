@@ -709,9 +709,10 @@ Fred LaPolla
 <li>Run a T Test.</li>
 </ol>
 </div>
-<div id="non-parametric-tests-for-comparing-means" class="slide section level2">
-<h1>Non-Parametric Tests for Comparing Means</h1>
+<div id="non-parametric-tests-for-comparing-medians" class="slide section level2">
+<h1>Non-Parametric Tests for Comparing Medians</h1>
 <h3 id="mann-whitney-unpaired-and-wilcoxon-paired">Mann-Whitney (unpaired) and Wilcoxon (paired)</h3>
+<p>If we have a small sample under 30 (which in this case we have a large sample) and non-normally distributed data we may need to choose a non-parametric test.</p>
 <p><strong>Confusing note:</strong> Both of these are called wilcox.test() in R, and we then set an argument to be paired = TRUE or FALSE.</p>
 <p>Remember paired means they are the same subjects before and after, unpaired means they are separate.</p>
 <p>Also non-parametric means not normally distributed. Outliers will throw off t-tests and parametric tests.</p>
